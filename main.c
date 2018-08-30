@@ -13,8 +13,31 @@
 #define EQUALS    ==
 #define IS        =
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
+#define LSH_RL_BUFSIZE 1024
 
-UNIMPLEMENTED (lsh_loop);
+UNIMPLEMENTED (lsh_read_line);
+
+
+UNIMPLEMENTED (lsh_split_line);
+UNIMPLEMENTED (lsh_execute);
+
+void lsh_loop(void){
+    char *line;
+    char **args;
+    int status;
+
+    do {
+        printf("> ");
+        line = lsh_read_line();
+        args = lsh_split_line(line);
+        status = lsh_execute(args);
+
+        free(line);
+        free(args);
+    } while (status);
+    
+}
+
 
 
 int main(){
